@@ -3,7 +3,7 @@
   "description": "Skills that get public social, business and marketplace data through Pom Labs Actors on Apify: video transcripts and downloads, comments, creator and professional profiles, company pages, community threads, short posts and product search.",
   "version": "0.4.2",
   "author": {
-    "name": "Pom Labs",
+    "name": "PomLabs",
     "url": "https://apify.com/pomlabs"
   },
   "homepage": "https://github.com/pomexplica/pomlabs",
