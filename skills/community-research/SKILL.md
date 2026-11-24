@@ -90,7 +90,7 @@ The response is a JSON array of items; posts and comments are separate items.
 | HTTP 402 or a message about usage limits | The Apify account is out of credit | Tell the user; do not retry |
 | HTTP 408, or the call runs past 280 s | Batch too large for a sync call | Split into smaller batches and retry once |
 | A single item with `status: "error"` (message such as `Timeout. Maybe slow down a bit`) | The archive behind the Actor was busy; it happens now and then | Wait a few seconds and retry the same call once |
-| `run-failed` (HTTP 400) on a subreddit or user | The name does not exist or is misspelled | Check the name with the user; do not retry |
+| An item with `status: "no_results"` for a subreddit or user | The name may not exist or be misspelled, or nothing matched the filters; the run still succeeds and this item is not charged | Check the name with the user; do not retry the same name |
 | Empty array | No post matched the keyword, dates or search | Widen the dates or drop `keyword`; say what was searched |
 | Only 25 posts from a search | That is the search limit | Use `startUrls` with the relevant subreddits plus `keyword` for more |
 
