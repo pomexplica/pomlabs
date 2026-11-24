@@ -1,7 +1,7 @@
 {
   "name": "pomlabs-social-data",
-  "description": "Skills that get public social and business data through Pom Labs Actors on Apify: video transcripts, video comments, creator profile stats, company pages and community threads.",
-  "version": "0.3.0",
+  "description": "Skills that get public social, business and marketplace data through Pom Labs Actors on Apify: video transcripts and downloads, comments, creator and professional profiles, company pages, community threads, short posts and product search.",
+  "version": "0.4.0",
   "author": {
     "name": "Pom Labs",
     "url": "https://apify.com/pomlabs"
@@ -10,12 +10,14 @@
   "repository": "https://github.com/pomexplica/pomlabs",
   "license": "MIT",
   "keywords": [
-    "transcript",
+    "apify",
     "comments",
-    "social-media",
     "company-data",
+    "ecommerce",
     "research",
-    "apify"
+    "social-media",
+    "transcript",
+    "video-download"
   ],
   "privacyPolicyUrl": "https://github.com/pomexplica/pomlabs/blob/main/PRIVACY.md"
 }

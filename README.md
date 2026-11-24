@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/pomexplica/pomlabs)](https://skills.sh/pomexplica/pomlabs)
 
-Agent skills that give Claude, Codex, Cursor and other AI agents data from public social and business pages: video transcripts, comments, creator stats, company pages and community threads. Each skill teaches the agent to call one of the [Pom Labs Actors on Apify](https://apify.com/pomlabs) with your own Apify account. No login to the platforms themselves, and you pay only for what is returned.
+Agent skills that give Claude, Codex, Cursor and other AI agents data from public social and business pages: video transcripts and downloads, comments, creator and professional profiles, company pages, community threads, short posts and marketplace products. Each skill teaches the agent to call one of the [Pom Labs Actors on Apify](https://apify.com/pomlabs) with your own Apify account. No login to the platforms themselves, and you pay only for what is returned.
 
 Written and maintained by Pom Labs, the author of the Actors.
 
@@ -21,6 +21,10 @@ On claude.ai, connect the **Apify** connector (Settings, Connectors) and the ski
 | [`creator-profile-stats`](skills/creator-profile-stats/SKILL.md) | "How many followers does @nasa have, and how do its Reels usually do?" · "Which of this creator's last Reels beat their normal?" | Instagram | $0.0025 per profile; + $0.003 with Reels stats |
 | [`company-pages`](skills/company-pages/SKILL.md) | "Enrich this list of companies with size, industry and website" · "What has this company been posting?" | LinkedIn | $0.003 per company |
 | [`community-research`](skills/community-research/SKILL.md) | "What do people on Reddit complain about in `<product>`?" · "Get this year's threads about proxies from r/webscraping" | Reddit | $0.002 per post or comment |
+| [`professional-profiles`](skills/professional-profiles/SKILL.md) | "What is this person's background? `<linkedin.com/in/...>`" · "Enrich these speakers with current role and company" | LinkedIn | $0.002 to $0.004 per profile |
+| [`short-post-search`](skills/short-post-search/SKILL.md) | "What are people posting on Threads about `<topic>`?" · "Get the replies to this Threads post" | Threads | $0.002 per post or profile |
+| [`marketplace-products`](skills/marketplace-products/SKILL.md) | "Find the best-selling wireless earbuds on AliExpress with prices" · "Compare sellers for this product in Brazil" | AliExpress | $0.001 per product |
+| [`video-download`](skills/video-download/SKILL.md) | "Save this video as MP4: `<link>`" · "Give me only the audio of this video as MP3" | TikTok, Instagram, YouTube, X, Facebook and others | $0.005 per file ($0.015 on YouTube) |
 
 Prices are per result and are the ones shown on each Actor's page at https://apify.com/pomlabs, where the current values live. Apify's free plan comes with monthly platform credit ($5 at the time of writing, see https://apify.com/pricing), enough for about 1,600 YouTube transcripts.
 
@@ -68,7 +72,7 @@ The plugin and its skills collect nothing and store nothing. See [PRIVACY.md](PR
 
 ## Trademarks
 
-YouTube, Instagram, Facebook, TikTok, LinkedIn and Reddit are trademarks of their owners. These skills work with public data from those platforms and are not affiliated with or endorsed by them.
+YouTube, Instagram, Facebook, Threads, TikTok, LinkedIn, Reddit, X and AliExpress are trademarks of their owners. These skills work with public data from those platforms and are not affiliated with or endorsed by them.
 
 ## License
 
