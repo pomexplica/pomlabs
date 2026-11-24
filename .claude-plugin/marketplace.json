@@ -1,6 +1,13 @@
 {
   "name": "pomlabs",
-  "owner": { "name": "Pom Labs", "url": "https://apify.com/pomlabs" },
+  "owner": {
+    "name": "Pom Labs",
+    "url": "https://apify.com/pomlabs"
+  },
+  "metadata": {
+    "description": "Skills that give AI agents public social and business data through Pom Labs Actors on Apify.",
+    "version": "0.2.0"
+  },
   "plugins": [
     {
       "name": "pomlabs-social-data",
