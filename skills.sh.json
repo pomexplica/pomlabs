@@ -1,0 +1,9 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    { "title": "Video", "description": "What is said in a video and what viewers say about it.", "skills": ["video-transcripts", "video-comments"] },
+    { "title": "Creators and companies", "description": "Public numbers of creator profiles and company pages.", "skills": ["creator-profile-stats", "company-pages"] },
+    { "title": "Communities", "description": "Threads and comments for market and user research.", "skills": ["community-research"] }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "pomlabs",
+  "owner": { "name": "Pom Labs", "url": "https://apify.com/pomlabs" },
+  "plugins": [
+    {
+      "name": "pomlabs-social-data",
+      "source": "./",
+      "description": "Skills that get public social and business data through Pom Labs Actors on Apify: video transcripts, video comments, creator profile stats, company pages and community threads.",
+      "version": "0.2.0",
+      "license": "MIT"
+    }
+  ]
+}
