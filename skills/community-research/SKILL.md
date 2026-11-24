@@ -19,11 +19,15 @@ One Apify Actor by Pom Labs returns Reddit posts and comments. This skill is wri
 
 Prices are the ones on the Actor's page; check https://apify.com/pomlabs/reddit-posts-comments-scraper if they matter to the user.
 
-## No terminal? Use the Apify connector
+## Two ways to run it
 
-If the Apify connector (MCP server `mcp.apify.com`) is connected, skip the token setup and the `curl` call: call `call-actor` with `actor` set to the Actor name from the table (with `/` instead of `~`) and `input` set to the same JSON as below, then read the result with `get-dataset-items` and the `datasetId` it returns. The connector bills the user's own Apify account at the same prices.
+**1. Apify connector (use this when it is there).** If the Apify tools `call-actor` and `get-dataset-items` are available (the plugin version of this skill declares the connector `https://mcp.apify.com`, and Apify is also in Claude's connector directory), call `call-actor` with `actor` set to the Actor name from the table, written with `/` instead of `~` (for example `pomlabs/reddit-posts-comments-scraper`), and `input` set to the same JSON shown in the examples below. `call-actor` waits up to 45 s (`waitSecs`); if it answers with `status` `RUNNING`, call `get-actor-run` with the `runId` until the status is `SUCCEEDED`. Then call `get-dataset-items` with the dataset id found at `storages.datasets.default.id`. To cap what a run can cost, pass `callOptions` with `maxTotalChargeUsd`. The user signs in to Apify once in the browser, and no token is handled here.
 
-## Setup (once)
+**2. API token and `curl`.** When those tools are not available, use the setup and the `curl` calls below.
+
+Both ways bill the user's own Apify account at the prices in the table.
+
+## Setup for the token path (once)
 
 The user needs an Apify account and an API token from https://console.apify.com/account/integrations, exported as `APIFY_TOKEN`. Never print the token and never put it in a URL.
 

@@ -10,7 +10,7 @@ Written and maintained by Pom Labs, the author of the Actors.
 
 > Install the skills from https://github.com/pomexplica/pomlabs and set everything up for me. Tell me where to create my Apify API token and where to put it, then test it by getting the transcript of https://www.youtube.com/watch?v=jNQXAC9IVRw
 
-On claude.ai, connect the **Apify** connector (Settings, Connectors) and the skills use it instead of a token.
+On claude.ai, connect the **Apify** connector (Settings, Connectors) and the skills use it: you sign in to Apify in the browser and no token is needed.
 
 ## Skills
 
@@ -49,18 +49,22 @@ Manual: copy a folder from `skills/` into your agent's skills directory (for Cla
 
 ## Setup
 
-1. Create an Apify account and copy your API token from https://console.apify.com/account/integrations.
-2. Make it available to your agent as the environment variable `APIFY_TOKEN`.
+You need an Apify account (the free plan is enough to start). Then one of:
 
-The skills read the token from the environment, never print it and never place it in a URL. Without a terminal, the Apify connector (`mcp.apify.com`) does the same job.
+- **Apify connector.** Installed as a plugin, this repository declares the Apify MCP server (`https://mcp.apify.com`, see [`.mcp.json`](.mcp.json)). Your agent asks you to sign in to Apify in the browser the first time. On claude.ai, add the Apify connector.
+- **API token.** Copy your token from https://console.apify.com/account/integrations and make it available to your agent as the environment variable `APIFY_TOKEN`. The skills never print it and never place it in a URL.
 
 ## What the skills do and do not do
 
-- They call the Apify API (`api.apify.com`) or the Apify connector, nothing else. There is no telemetry and no instruction fetched from anywhere at run time: what you read in each `SKILL.md` is all there is.
+- They run Pom Labs Actors through the Apify connector (`mcp.apify.com`) or the Apify API (`api.apify.com`), and contact nothing else. There is no telemetry and no instruction fetched from anywhere at run time: what you read in each `SKILL.md` is all there is.
 - They read public pages only. Private accounts, private videos and anything behind a login are out of reach.
 - Before a large batch, the agent estimates the cost and asks you first.
 
 Trigger tests for each skill (requests that should and should not load it) are in [`tests/triggers.md`](tests/triggers.md).
+
+## Privacy
+
+The plugin and its skills collect nothing and store nothing. See [PRIVACY.md](PRIVACY.md).
 
 ## Trademarks
 
