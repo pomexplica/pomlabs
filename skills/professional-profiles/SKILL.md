@@ -13,7 +13,7 @@ One Apify Actor by Pom Labs returns what a logged-out visitor sees on a LinkedIn
 | | |
 | --- | --- |
 | Actor | `pomlabs~linkedin-profile-scraper` |
-| Price | $0.002 per profile read from the public page; $0.004 per profile when the Actor delivers it in full mode (every position with dates, skills, degrees) |
+| Price | $0.002 per profile ($2 per 1,000). Profiles not found or refused are not charged |
 | Auth | `Authorization: Bearer $APIFY_TOKEN`. No LinkedIn account or cookie is used |
 | Typical time | 3 to 10 s per profile |
 
@@ -75,4 +75,4 @@ The response is a JSON array with one object per profile.
 
 ## Cost check before big batches
 
-Cost is `profiles x $0.002` to `profiles x $0.004`. Above 1,000 profiles, tell the user the estimate and wait for a yes.
+Cost is `profiles x $0.002`. Above 2,500 profiles ($5), tell the user the estimate and wait for a yes.

@@ -77,7 +77,7 @@ The response is a JSON array with one object per profile.
 | HTTP 401 | Token missing or wrong | Ask the user for a valid `APIFY_TOKEN` |
 | HTTP 402 or a message about usage limits | The Apify account is out of credit | Tell the user; do not retry |
 | HTTP 408, or the call runs past 280 s | Batch too large for a sync call | Split into smaller batches and retry once |
-| Item with `status: "not_found_or_restricted"` | The profile does not exist, changed its name, or Instagram shows it only to logged-in users (age or region restricted) | Report it for that username, with the item's `error` text, and continue with the others |
+| Item with `status: "not_found_or_restricted"` | The profile does not exist, changed its name, or Instagram shows it only to logged-in users (age or region restricted) | Report it for that username, with the item's `error` text, and continue with the others; it was not charged |
 | `isPrivate: true` and no `reelsStats` | Private account | Report followers and bio only; Reels of private accounts are not readable |
 
 ## Cost check before big batches

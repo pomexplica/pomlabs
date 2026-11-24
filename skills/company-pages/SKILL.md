@@ -70,7 +70,7 @@ The response is a JSON array with one object per company.
 | HTTP 401 | Token missing or wrong | Ask the user for a valid `APIFY_TOKEN` |
 | HTTP 402 or a message about usage limits | The Apify account is out of credit | Tell the user; do not retry |
 | HTTP 408, or the call runs past 280 s | Batch too large for a sync call | Split into smaller batches and retry once |
-| Item with `status: "not_found"` | No company page under that slug | Find the exact LinkedIn URL and run again |
+| Item with `status: "not_found"` | No company page under that slug | Find the exact LinkedIn URL and run again; it was not charged |
 | Item with another `status` other than `ok` | LinkedIn kept showing its login wall | Retry that company once, then report the item's `error` text |
 | A different company than expected | The slug was guessed from the name | Find the exact LinkedIn URL and run again |
 
