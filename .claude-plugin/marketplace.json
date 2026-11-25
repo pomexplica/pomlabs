@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Skills that give AI agents public social and business data through Pom Labs Actors on Apify.",
-    "version": "0.4.2"
+    "version": "0.5.0"
   },
   "plugins": [
     {
       "name": "pomlabs-social-data",
       "source": "./",
-      "description": "Skills that get public social, business and marketplace data through Pom Labs Actors on Apify: video transcripts and downloads, comments, creator and professional profiles, company pages, community threads, short posts and product search.",
-      "version": "0.4.2",
+      "description": "Skills that get public social, business and marketplace data through Pom Labs Actors on Apify: video transcripts and downloads, comments, creator and professional profiles, company pages, community threads, short posts, product search, Google Trends, brand visibility in AI answers, web page history, image moderation and coupon checks.",
+      "version": "0.5.0",
       "license": "MIT"
     }
   ]

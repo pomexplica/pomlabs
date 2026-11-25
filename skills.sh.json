@@ -29,10 +29,27 @@
       ]
     },
     {
-      "title": "Commerce",
-      "description": "Product prices, sales and sellers.",
+      "title": "Search, AI and the web",
+      "description": "What people search for, what AI assistants answer, and what web pages said before.",
       "skills": [
-        "marketplace-products"
+        "search-trends",
+        "ai-answer-visibility",
+        "page-history"
+      ]
+    },
+    {
+      "title": "Commerce",
+      "description": "Product prices, sales, sellers and coupon codes.",
+      "skills": [
+        "marketplace-products",
+        "coupon-code-checker"
+      ]
+    },
+    {
+      "title": "Images",
+      "description": "Moderation and tags for image URLs.",
+      "skills": [
+        "nsfw-image-detector"
       ]
     }
   ]

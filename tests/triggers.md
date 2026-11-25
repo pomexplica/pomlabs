@@ -1,6 +1,6 @@
 # Trigger tests
 
-For each skill: three requests that should load it and two similar ones that should not. Run them against the nine descriptions before changing any `description`.
+For each skill: three requests that should load it and two similar ones that should not. Run them against all the descriptions before changing any `description`.
 
 | Skill | Should load | Should not load |
 | --- | --- | --- |
@@ -13,4 +13,8 @@ For each skill: three requests that should load it and two similar ones that sho
 | `short-post-search` | "What are people posting on Threads about the new iPhone?" · "Get the replies to https://www.threads.com/@zuck/post/DgHQuRJm8lC" · "How many followers does @zuck have on Threads?" | "Write a Threads post about our launch" · "What do people on Reddit say about the new iPhone?" |
 | `marketplace-products` | "Find the best-selling wireless earbuds on AliExpress with prices" · "How much does a 65W GaN charger cost on AliExpress shipped to Brazil?" · "Scrape this AliExpress search page: https://www.aliexpress.com/w/wholesale-robot-vacuum.html" | "Find the cheapest price for this item on Amazon" · "Track my AliExpress order" |
 | `video-download` | "Save this TikTok as an MP4: https://www.tiktok.com/@scout2015/video/6718335390845095173" · "I only need the audio of this YouTube video as MP3" · "Download seconds 10 to 25 of this X video" | "What is said in this video? I just need the text" · "Compress this mp4 on my disk to 10 MB" |
-
+| `search-trends` | "Is interest in air fryers growing in the US this year?" · "What are the breakout searches related to 'ai agents' in Brazil?" · "Compare Google search interest for Pepsi and Coke by country" | "Find the top Reddit posts about air fryers" · "How many people search for 'air fryer' per month (exact volume for SEO)?" |
+| `ai-answer-visibility` | "Does ChatGPT mention HubSpot when asked for the best CRM?" · "Check if Claude and Perplexity recommend our brand acme.com for 'best project management tool'" · "Which competitors show up in AI answers for our category?" | "Write SEO blog posts so we rank on Google" · "What are people on Reddit saying about our brand?" |
+| `page-history` | "What did https://apify.com/pricing say in 2024?" · "When did this competitor change its terms of service page?" · "Recover the text of this deleted blog post from the archives" | "Monitor this page and alert me when it changes from now on" · "Download this YouTube video" |
+| `nsfw-image-detector` | "Check these 200 user-uploaded image URLs for nudity and violence" · "Flag which of these profile photos are unsafe to publish" · "Tag these product images by category and content" | "Generate an image of a cat" · "Remove the background from this photo" |
+| `coupon-code-checker` | "Which of these Mercado Livre coupon codes still work: MELIACHA30, MELIGAMER?" · "Is the Amazon.com.br promo code PRIMEIRACOMPRA valid?" · "Validate this list of coupons for my deals site before I post them" | "Find me coupon codes for Mercado Livre" · "Find the cheapest price for this item on AliExpress" |
