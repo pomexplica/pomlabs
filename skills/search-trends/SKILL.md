@@ -1,6 +1,6 @@
 ---
 name: search-trends
-description: Gets Google Trends data as JSON for any keyword - interest over time, peak date and trend change, interest by country or region, and the top and rising related searches - for any country, time range, category and for web, YouTube, News, Images or Shopping search. Use when the user asks whether interest in a topic, product or brand is growing, wants to compare seasons or countries, or wants related and breakout searches for content or product ideas. Runs on Apify with the user's own APIFY_TOKEN; pay per keyword.
+description: Gets Google Trends data as JSON for any keyword - interest over time, peak date and trend change, interest by country, region or US metro area, the top and rising related searches, and comparisons of up to 5 keywords on one scale with the leader - plus the Trending now list of any country (what people search right now, with volume, % increase and, when Google has them, news). Use when the user asks whether interest in a topic, product or brand is growing, wants to compare keywords, seasons or countries, wants related and breakout searches for content or product ideas, or asks what is trending today in a country. Runs on Apify with the user's own APIFY_TOKEN; pay per keyword or per trending topic.
 license: MIT
 ---
 
@@ -13,7 +13,7 @@ One Apify Actor by Pom Labs reads Google Trends for a list of keywords. This ski
 | | |
 | --- | --- |
 | Actor | `pomlabs~google-trends-scraper` |
-| Price | $0.002 per keyword delivered ($2 per 1,000); failures are free |
+| Price | $0.002 per keyword delivered ($2 per 1,000; a comparison of N keywords counts N); $0.0009 per Trending now topic; failures and countries with no result are free |
 | Auth | `Authorization: Bearer $APIFY_TOKEN` |
 | Typical time | 5 to 20 s for a few keywords (median 8 s in our runs) |
 
@@ -48,6 +48,30 @@ curl -sS -X POST \
 
 The response is a JSON array with one object per keyword.
 
+## Compare keywords on one scale
+
+Put up to 5 keywords in **one** `searchTerms` entry, separated by commas. The result is one object with `comparedTerms`, `interestOverTime` (each point has `values` per term), `averages`, `terms` (average, peak date and trend change of each) and `leader`:
+
+```bash
+curl -sS -X POST \
+  "https://api.apify.com/v2/acts/pomlabs~google-trends-scraper/run-sync-get-dataset-items?timeout=280" \
+  -H "Authorization: Bearer $APIFY_TOKEN" -H "Content-Type: application/json" \
+  -d '{"searchTerms":["bitcoin, ethereum, solana"],"geo":"US","timeRange":"today 12-m"}'
+```
+
+Set `splitByComma: true` if a comma is part of one keyword and should not start a comparison.
+
+## Trending now (no keyword)
+
+```bash
+curl -sS -X POST \
+  "https://api.apify.com/v2/acts/pomlabs~google-trends-scraper/run-sync-get-dataset-items?timeout=280" \
+  -H "Authorization: Bearer $APIFY_TOKEN" -H "Content-Type: application/json" \
+  -d '{"mode":"trending","trendingGeo":["US","BR"],"trendingHours":"24","trendingMaxItems":20,"includeNews":true}'
+```
+
+One object per trending search: `title`, `searchVolume`, `searchVolumeText` ("500K+"), `increasePercent`, `startedAt`, `endedAt`, `isActive`, `categories`, `relatedQueries`, `articles`, `picture`, `rank`, `exploreUrl`. `trendingHours` is `4`, `24`, `48` or `168`; `trendingCategories` takes names or ids (`Sports`, `Technology`, `17`); `activeOnly: true` keeps only searches still trending.
+
 ## Input fields
 
 | Field | Meaning |
@@ -60,13 +84,21 @@ The response is a JSON array with one object per keyword.
 | `searchType` | `web` (default), `youtube`, `news`, `images`, `shopping` |
 | `category` | Google Trends category number (0 = all) |
 | `includeRelatedQueries`, `includeInterestByRegion` | Both on by default |
+| `includeInterestByMetro` | US searches: interest by Nielsen metro area (210 DMAs), in `interestByMetro` |
+| `includeInterestOverTime` | Off to skip the time series and save time |
+| `spreadsheetId` | A public Google Sheet; the first column is read as keywords |
+| `viewedFrom` | Country the request comes from (for local results) |
+| `maxResults` | Cap each list (regions, metros, related searches) |
+| `outputFormat` | `summary` (default, one object per keyword) or `flat` (one row per data point, for spreadsheets) |
 | `language`, `timezoneOffset` | Language of names and dates (`en-US`, `pt-BR`); minutes from UTC |
 
 ## Output fields worth keeping
 
-`searchTerm`, `geo`, `timeRange`, `interestOverTime` (list of `date` and `value`, 0 to 100), `average`, `peakDate`, `trendChangePercent`, `interestByRegion`, `relatedQueriesTop`, `relatedQueriesRising` (with "Breakout" values), `trendsUrl`, `hasData`.
+`searchTerm`, `geo`, `timeRange`, `interestOverTime` (list of `date` and `value`, 0 to 100), `average`, `peakDate`, `trendChangePercent`, `interestByRegion`, `interestByMetro`, `relatedQueriesTop`, `relatedQueriesRising` (with "Breakout" values), `trendsUrl`, `hasData`; in comparisons also `comparedTerms`, `terms` and `leader`.
 
-Google Trends values are relative (100 = the peak in that period and place), not search counts. Keywords from separate results are not on the same scale; say so when comparing them.
+Related topics: Google withholds them from automated requests; the result says `relatedTopicsStatus: withheld_by_google`. Do not promise them to the user.
+
+Google Trends values are relative (100 = the peak in that period and place), not search counts. Keywords from separate results are not on the same scale; to compare them, use one comparison entry (above).
 
 ## When something fails
 
@@ -79,4 +111,4 @@ Google Trends values are relative (100 = the peak in that period and place), not
 
 ## Cost check before big batches
 
-Cost is `keywords x $0.002`. Above 2,000 keywords ($4), tell the user the estimate and wait for a yes.
+Cost is `keywords x $0.002`, plus `trending topics x $0.0009`. Above 2,000 keywords ($4), tell the user the estimate and wait for a yes. Cap a run with `maxTotalChargeUsd`.
