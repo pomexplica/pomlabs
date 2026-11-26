@@ -1,6 +1,6 @@
 ---
 name: creator-profile-stats
-description: Gets the public numbers of Instagram profiles as JSON - followers, bio, links, verification - and, on request, the views of the latest Reels with the account's median, so each Reel can be judged against the account's own baseline. Use when the user names an Instagram account or profile link and wants its follower count, bio or links, wants to know how its Reels usually perform, which recent Reel beat the account's normal, or wants to compare creators or vet an influencer. Runs on Apify with the user's own APIFY_TOKEN; pay per profile, no login to Instagram.
+description: Gets the public numbers of Instagram profiles as JSON - exact followers and posts count, bio, links, category, business address, the 12 latest posts with likes and comments, engagement rate - and, on request, related accounts, the About this account section (date joined, country) and the exact views of the latest Reels with the account's median. Use when the user names an Instagram account or profile link and wants its follower count, posts, engagement rate, bio or links, similar accounts, when it was created or where it is based, how its Reels usually perform or which recent Reel beat the account's normal, or wants to compare creators or vet an influencer. Runs on Apify with the user's own APIFY_TOKEN; pay per profile, no login to Instagram.
 license: MIT
 ---
 
@@ -13,9 +13,9 @@ One Apify Actor by Pom Labs returns the public data of Instagram profiles. This 
 | | |
 | --- | --- |
 | Actor | `pomlabs~instagram-profile-data` |
-| Price | $0.0025 per profile; + $0.003 per profile when Reels stats are requested |
+| Price | $0.0025 per profile (latest posts, engagement and related accounts included); + $0.0063 with About this account; + $0.003 with Reels stats |
 | Auth | `Authorization: Bearer $APIFY_TOKEN` |
-| Typical time | 5 to 15 s per profile; 30 to 60 s with Reels stats |
+| Typical time | 5 to 15 s per profile, several in parallel |
 
 Prices are the ones on the Actor's page; check https://apify.com/pomlabs/instagram-profile-data if they matter to the user.
 
@@ -39,14 +39,14 @@ If the token is missing, stop and tell the user exactly that. Do not fall back t
 
 ## Get profiles
 
-Keep each call to 5 profiles or fewer when `includeReelsStats` is on, 25 otherwise, so it finishes inside the 300 s sync limit.
+Keep each call to 25 profiles or fewer, so it finishes inside the 300 s sync limit.
 
 ```bash
 # Usernames (with or without @) or profile URLs
 curl -sS -X POST \
   "https://api.apify.com/v2/acts/pomlabs~instagram-profile-data/run-sync-get-dataset-items?timeout=280" \
   -H "Authorization: Bearer $APIFY_TOKEN" -H "Content-Type: application/json" \
-  -d '{"usernames":["nasa"],"includeReelsStats":true}'
+  -d '{"usernames":["nasa","starbucks"],"includeRelatedProfiles":true,"includeAboutSection":true,"includeReelsStats":true}'
 ```
 
 The response is a JSON array with one object per profile.
@@ -55,19 +55,28 @@ The response is a JSON array with one object per profile.
 
 | Field | Meaning |
 | --- | --- |
-| `usernames` (required) | Array of usernames or profile URLs. Duplicates are removed |
-| `includeReelsStats` | `true` adds `reelsStats`. Leave `false` when the user only wants followers, bio or links |
+| `usernames` (required) | Array of usernames, profile URLs or numeric profile ids. Duplicates are removed |
+| `includeLatestPosts` | Default `true`: `latestPosts` (12) and `postStats` (engagement). Included in the profile price |
+| `includeRelatedProfiles` | `true` adds `relatedProfiles` (accounts Instagram shows as similar); `maxRelatedProfiles` 1 to 80, default 30. Included in the profile price |
+| `includeAboutSection` | `true` adds `about` (date joined, country, former usernames). Extra charge |
+| `includeReelsStats` | `true` adds `reelsStats`. Extra charge |
 
 ## Output fields worth keeping
 
-`status` (`ok` or an error code), `username`, `fullName`, `followers`, `following`, `biography`, `externalUrl`, `bioLinks`, `isVerified`, `isPrivate`, `profileUrl`.
+`status` (`ok` or an error code), `username`, `fullName`, `followers`, `following`, `postsCount`, `biography`, `externalUrl`, `bioLinks`, `isVerified`, `isPrivate`, `category`, `accountType` (`personal`, `business`, `creator`), `businessAddress`, `highlights`, `threadsUsername`, `profileUrl`.
 
-`reelsStats`, when requested: `reelsRead` (about 15), `medianViews`, `averageViews`, `maxViews`, and `reels`, each with `url`, `views`, `viewsText` (as Instagram shows it, e.g. `2.6M`) and `multipleOfMedian`.
+`latestPosts`: `url`, `type`, `caption`, `timestamp`, `likesCount`, `commentsCount`, `isPinned`, `location`, `taggedUsers`, `coauthors`.
+
+`postStats`: `avgLikes`, `medianLikes`, `avgComments`, `engagementRate` (percent of followers per post, pinned posts left out), `postsPerWeek`, `daysSinceLastPost`.
+
+`relatedProfiles` and `about` (`dateJoined`, `accountBasedIn`), when requested.
+
+`reelsStats`, when requested: `reelsRead` (12), `medianViews`, `averageViews`, `maxViews`, and `reels`, each with `url`, exact `views`, `likes`, `comments`, `pinned` and `multipleOfMedian` (pinned Reels are left out of the median).
 
 ## Reading the numbers
 
 - Judge a Reel by `multipleOfMedian`, not by raw views: 2.6M views is weak on an account whose median is 4.1M (0.63x) and huge on one whose median is 50K.
-- Views come rounded as Instagram displays them, so treat them as two significant digits.
+- Engagement rate under 1% is normal for accounts with millions of followers; compare it with accounts of the same size.
 - `provisional: true` in `reelsStats` means few Reels were readable; say so instead of presenting the median as solid.
 
 ## When something fails
@@ -82,4 +91,4 @@ The response is a JSON array with one object per profile.
 
 ## Cost check before big batches
 
-Cost is `profiles x $0.0025`, or `profiles x $0.0055` with Reels stats. Above 500 profiles, tell the user the estimate and wait for a yes.
+Cost is `profiles x $0.0025`, plus $0.0063 per profile with About this account and $0.003 with Reels stats. Above 500 profiles, tell the user the estimate and wait for a yes.
