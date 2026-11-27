@@ -13,11 +13,12 @@
     },
     {
       "title": "People and companies",
-      "description": "Public numbers and background of creators, professionals and companies.",
+      "description": "Public numbers and background of creators, professionals and companies, and the jobs companies post.",
       "skills": [
         "creator-profile-stats",
         "professional-profiles",
-        "company-pages"
+        "company-pages",
+        "job-listings"
       ]
     },
     {

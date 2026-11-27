@@ -30,6 +30,7 @@ On claude.ai, connect the **Apify** connector (Settings, Connectors) and the ski
 | [`page-history`](skills/page-history/SKILL.md) | "What did this pricing page say a year ago?" · "When did this competitor change its terms?" | Wayback Machine, Arquivo.pt, archive.today, Common Crawl | $0.0025 per version |
 | [`nsfw-image-detector`](skills/nsfw-image-detector/SKILL.md) | "Check these uploaded images for nudity or violence" · "Tag these product photos by content" | Any public image URL | $0.002 per image |
 | [`coupon-code-checker`](skills/coupon-code-checker/SKILL.md) | "Which of these Mercado Livre coupon codes still work?" · "Is this Amazon Brazil promo code valid?" | Mercado Livre, Amazon Brazil | $0.01 per code |
+| [`job-listings`](skills/job-listings/SKILL.md) | "Find remote Python developer jobs in New York with salaries" · "What do data analysts earn in Chicago, by Indeed and Glassdoor?" | Indeed (62 countries), Glassdoor | $0.0001 per job |
 
 Prices are per result and are the ones shown on each Actor's page at https://apify.com/pomlabs, where the current values live. Apify's free plan comes with monthly platform credit ($5 at the time of writing, see https://apify.com/pricing), enough for about 1,600 YouTube transcripts.
 
