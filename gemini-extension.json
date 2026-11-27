@@ -1,0 +1,24 @@
+{
+  "name": "pomlabs",
+  "version": "0.6.0",
+  "description": "Pom Labs data tools for agents: video transcripts, comments, creator and LinkedIn profiles, Reddit, Google Maps leads, Trustpilot, email verifier and more, via Apify.",
+  "mcpServers": {
+    "pomlabs": {
+      "type": "http",
+      "url": "https://mcp.apify.com?tools=pomlabs/youtube-comments-scraper,pomlabs/social-video-transcript,pomlabs/linkedin-company-scraper,pomlabs/youtube-transcript-scraper,pomlabs/instagram-profile-data,pomlabs/aliexpress-scraper,pomlabs/linkedin-profile-scraper,pomlabs/reddit-posts-comments-scraper,pomlabs/threads-scraper,pomlabs/video-downloader,pomlabs/page-time-machine,pomlabs/google-trends-scraper,pomlabs/ai-brand-visibility,pomlabs/mercadolivre-coupon-checker,pomlabs/image-moderation-tagger,pomlabs/google-maps-business-leads,pomlabs/google-ads-transparency-scraper,pomlabs/multi-engine-web-search,pomlabs/photo-video-geolocation,pomlabs/telegram-channel-scraper,pomlabs/amazon-reviews-deep,pomlabs/email-verifier,pomlabs/trustpilot-reviews-scraper,pomlabs/youtube-channel-email-scraper",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      },
+      "timeout": 300000
+    }
+  },
+  "settings": [
+    {
+      "name": "Apify API token",
+      "description": "Your Apify API token (free account at apify.com; Settings > API & Integrations). The tools run Pom Labs Actors on your Apify account, paid per result.",
+      "envVar": "APIFY_TOKEN",
+      "sensitive": true
+    }
+  ],
+  "contextFileName": "GEMINI.md"
+}

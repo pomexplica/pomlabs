@@ -55,6 +55,12 @@ Claude Code, as a plugin:
 /plugin install pomlabs-social-data@pomlabs
 ```
 
+Gemini CLI, as an extension (the skills plus the `pomlabs` MCP server with every tool; it asks for your Apify API token):
+
+```bash
+gemini extensions install https://github.com/pomexplica/pomlabs
+```
+
 Manual: copy a folder from `skills/` into your agent's skills directory (for Claude Code, `~/.claude/skills/`).
 
 ## Setup
