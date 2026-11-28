@@ -30,6 +30,20 @@ On claude.ai, connect the **Apify** connector (Settings, Connectors) and the ski
 | [`page-history`](skills/page-history/SKILL.md) | "What did this pricing page say a year ago?" · "When did this competitor change its terms?" | Wayback Machine, Arquivo.pt, archive.today, Common Crawl | $0.0025 per version |
 | [`nsfw-image-detector`](skills/nsfw-image-detector/SKILL.md) | "Check these uploaded images for nudity or violence" · "Tag these product photos by content" | Any public image URL | $0.002 per image |
 | [`coupon-code-checker`](skills/coupon-code-checker/SKILL.md) | "Which of these Mercado Livre coupon codes still work?" · "Is this Amazon Brazil promo code valid?" | Mercado Livre, Amazon Brazil | $0.01 per code |
+| [`product-reviews`](skills/product-reviews/SKILL.md) | "What do buyers complain about in this Amazon product?" · "Get the 1-star reviews of `<ASIN>`" | Amazon | $0.0015 per review |
+| [`sold-listings`](skills/sold-listings/SKILL.md) | "What did this item actually sell for on eBay?" · "Sold prices of used iPhone 13 in the last 90 days" | eBay | $0.002 per sold listing |
+| [`email-verification`](skills/email-verification/SKILL.md) | "Which of these emails are deliverable?" · "Clean this lead list before sending" | Any email address | $0.00085 per conclusive email |
+| [`page-posts`](skills/page-posts/SKILL.md) | "What has this Facebook page posted this month?" · "Get the comments of this page's last posts" | Facebook pages | $0.002 per post |
+| [`social-search`](skills/social-search/SKILL.md) | "What are people posting on Facebook about `<topic>`?" · "Find buy-and-sell listings for bikes in my city" | Facebook search, groups, Marketplace | $0.001 per post, profile or page |
+| [`ad-library`](skills/ad-library/SKILL.md) | "Which ads is this competitor running on Google?" · "Show the YouTube ads of `<advertiser>`" | Google Ads Transparency Center | $0.0015 per ad |
+| [`business-leads`](skills/business-leads/SKILL.md) | "List dentists in Curitiba with phone and website" · "Find the emails of these local businesses" | Google Maps | $0.0036 per place |
+| [`post-comments`](skills/post-comments/SKILL.md) | "What are people saying under this Instagram post?" · "Get the replies to this Reel" | Instagram | $0.001 per comment |
+| [`web-search`](skills/web-search/SKILL.md) | "Search Google, Bing and DuckDuckGo for `<query>` and compare" · "Read the top results as Markdown" | Google, Bing, DuckDuckGo, Brave and others | $0.0025 per engine answered |
+| [`photo-geolocation`](skills/photo-geolocation/SKILL.md) | "Where was this photo taken?" · "Estimate the location of this video" | Any public photo or video URL | $0.0225 per photo or video |
+| [`marketplace-search-br`](skills/marketplace-search-br/SKILL.md) | "Find the cheapest air fryer on Shopee Brazil" · "Get the reviews of this Shopee product" | Shopee Brazil | $0.0003 per product |
+| [`channel-posts`](skills/channel-posts/SKILL.md) | "What did this Telegram channel post this week?" · "Search a public channel for `<word>`" | Telegram public channels | $0.001 per post |
+| [`company-reviews`](skills/company-reviews/SKILL.md) | "What do customers say about `<company>` on Trustpilot?" · "Get this year's 1-star reviews" | Trustpilot | $0.0005 per review |
+| [`channel-contacts`](skills/channel-contacts/SKILL.md) | "Find the business email of these YouTube channels" · "List channels about `<topic>` with contacts" | YouTube | $0.001 per channel; $0.004 per email |
 | [`job-listings`](skills/job-listings/SKILL.md) | "Find remote Python developer jobs in New York with salaries" · "What do data analysts earn in Chicago, by Indeed and Glassdoor?" | Indeed (62 countries), Glassdoor | $0.0001 per job |
 
 Prices are per result and are the ones shown on each Actor's page at https://apify.com/pomlabs, where the current values live. Apify's free plan comes with monthly platform credit ($5 at the time of writing, see https://apify.com/pricing), enough for about 1,600 YouTube transcripts.
